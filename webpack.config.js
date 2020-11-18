@@ -24,6 +24,19 @@ const optimization = () => {
     return config;
 }
 
+const babelOptions = preset => {
+    const options = {
+        presets: ['@babel/preset-env'],
+        plugins: ['@babel/plugin-proposal-class-properties']
+    }
+
+    if (preset) {
+        options.presets.push(preset)
+    }
+
+    return options;
+}
+
 const fileName = ext => isProd ? `[name].[hash].${ext}` : `[name].${ext}`;
 
 module.exports = {
@@ -97,10 +110,7 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-proposal-class-properties']
-                    }
+                    options: babelOptions()
                 }
             },
             {
@@ -108,10 +118,7 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react'],
-                        plugins: ['@babel/plugin-proposal-class-properties']
-                    }
+                    options: babelOptions('@babel/preset-react')
                 }
             }
         ]

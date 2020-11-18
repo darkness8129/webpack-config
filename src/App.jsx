@@ -1,5 +1,5 @@
 import React from 'react';
-import Hello from './components/Hellso';
+import Hello from './components/Hello';
 import './styles/App.sass';
 
 const App = () => {
